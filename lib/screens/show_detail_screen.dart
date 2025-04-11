@@ -4,22 +4,22 @@ import '../models/tv_show.dart';
 
 class ShowDetailScreen extends StatefulWidget {
   final String showId;
-  const ShowDetailScreen({Key? key, required this.showId}) : super(key: key);
+  const ShowDetailScreen({super.key, required this.showId});
 
   @override
-  _ShowDetailScreenState createState() => _ShowDetailScreenState();
+  State<ShowDetailScreen> createState() => _ShowDetailScreenState();
 }
 
 class _ShowDetailScreenState extends State<ShowDetailScreen> {
   late Future<TVShow> _futureShow;
   final APIService _apiService = APIService();
-  
+
   @override
   void initState() {
     super.initState();
     _futureShow = _apiService.fetchShowDetails(id: widget.showId);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,28 +37,63 @@ class _ShowDetailScreenState extends State<ShowDetailScreen> {
             return const Center(child: Text('Aucune donnée trouvée'));
           } else {
             final TVShow show = snapshot.data!;
-            return SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Affichage de l'image
-                  Center(
-                    child: show.image.isNotEmpty
-                      ? Image.network(show.image, fit: BoxFit.cover)
-                      : Container(),
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 800),
+                child: SingleChildScrollView(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (show.image.isNotEmpty)
+                        Center(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.network(
+                              show.image,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      const SizedBox(height: 24),
+                      Row(
+                        children: [
+                          Icon(Icons.tv, size: 28, color: Colors.blueAccent),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              show.name,
+                              style: const TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.format_quote, color: Colors.blueGrey),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              show.description?.trim().isNotEmpty == true
+                                  ? show.description!
+                                  : 'Pas de description disponible.',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                height: 1.5,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    show.name,
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    show.description ?? 'Pas de description disponible.',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ],
+                ),
               ),
             );
           }

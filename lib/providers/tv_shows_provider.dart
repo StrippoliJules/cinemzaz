@@ -8,7 +8,6 @@ class TVShowsProvider extends ChangeNotifier {
   List<TVShow> _tvShows = [];
   bool _isLoading = false;
   String _error = '';
-  int _currentPage = 1;
   String _query = '';
   
   List<TVShow> get tvShows => _tvShows;
@@ -28,7 +27,6 @@ class TVShowsProvider extends ChangeNotifier {
         shows = await _apiService.fetchPopularShows(page: page);
       }
       _tvShows = shows;
-      _currentPage = page;
     } catch (e) {
       _error = e.toString();
     } finally {
