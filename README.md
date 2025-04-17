@@ -1,16 +1,27 @@
-# cinemzaz
+# TV Shows App
+ Cinemzaz est une application mobile développée avec Flutter permettant aux utilisateurs de découvrir des séries télévisées populaires, de rechercher des séries et de consulter leurs détails. L'application utilise l'API publique d’Episodate.
+## Fonctionnalités
+ - Recherche de séries par nom
+ - Affichage paginé des séries populaires 
+ - Navigation vers un écran de détails
+ - Affichage complet des informations d'une série (titre, image, description) 
+## Technologies utilisées
+ - http (pour utiliser l’API REST)
+ - Flutter 
+ - provider + ChangeNotifier (gestion d’état)
+ - Navigator (navigation entre écrans) 
+## API utilisée
+ - Endpoint recherche :     https://www.episodate.com/api/search?q=:name&page=:page
+ - Endpoint séries populaires :     https://www.episodate.com/api/mostpopular?page=:page  
+ - Endpoint détails :     https://www.episodate.com/api/show-details?q=:id 
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contraintes
+ - Interface responsive et fluide
+ - Affichage d’un indicateur de chargement pendant les requêtes
+ - Gestion des cas d’erreurs (pas de résultat, erreur API, etc.)
+## Livrables
+ 
+ - Application Flutter fonctionnelle avec deux pages :
+ - Liste des séries avec recherche
+ - Détail d’une série sélectionnée
+ - Documentation (README)
