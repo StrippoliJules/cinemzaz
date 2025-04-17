@@ -1,3 +1,8 @@
+## Auteurs
+Martin Hugo
+Strippoli Jules
+Couly Guilhem
+
 # TV Shows App
  Cinemzaz est une application mobile développée avec Flutter permettant aux utilisateurs de découvrir des séries télévisées populaires, de rechercher des séries et de consulter leurs détails. L'application utilise l'API publique d’Episodate.
 ## Fonctionnalités
